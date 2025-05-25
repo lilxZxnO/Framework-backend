@@ -1,3 +1,5 @@
+let restaurantToEdit = null;
+
 function showTab(tabName) {
     document.querySelectorAll('.content').forEach(content => {
         content.classList.remove('active');
@@ -21,6 +23,7 @@ async function loadRestaurants() {
                 <td>${restaurant.name}</td>
                 <td>${restaurant.location}</td>
                 <td>
+                    <button onclick="editRestaurant(${restaurant.id}, '${restaurant.name.replace(/'/g, "&#39;")}', '${restaurant.location.replace(/'/g, "&#39;")}')">Modifier</button>
                     <button onclick="deleteRestaurant(${restaurant.id})">Supprimer</button>
                 </td>
             </tr>
@@ -29,22 +32,40 @@ async function loadRestaurants() {
     updateRestaurantSelect();
 }
 
+function editRestaurant(id, name, location) {
+    document.getElementById('restaurantName').value = name;
+    document.getElementById('restaurantAddress').value = location;
+    restaurantToEdit = id;
+    document.querySelector('#restaurantForm button[type="submit"]').textContent = "Mettre à jour";
+}
+
 async function addRestaurant(event) {
     event.preventDefault();
     const restaurant = {
         name: document.getElementById('restaurantName').value,
         location: document.getElementById('restaurantAddress').value
     };
-    const response = await fetch('/api/restaurants', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(restaurant)
-    });
+    let response;
+    if (restaurantToEdit) {
+        response = await fetch(`/api/restaurants/${restaurantToEdit}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(restaurant)
+        });
+        restaurantToEdit = null;
+        document.querySelector('#restaurantForm button[type="submit"]').textContent = "Ajouter Restaurant";
+    } else {
+        response = await fetch('/api/restaurants', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(restaurant)
+        });
+    }
     if (response.ok) {
         document.getElementById('restaurantForm').reset();
         loadRestaurants();
     } else {
-        alert("Erreur lors de l'ajout du restaurant");
+        alert("Erreur lors de l'enregistrement du restaurant");
     }
 }
 
