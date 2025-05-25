@@ -34,6 +34,7 @@ exports.getRestaurantById = async (req, res) => {
 
 exports.createRestaurant = async (req, res) => {
   try {
+    console.log(req.body);
     const restaurant = await prisma.restaurant.create({
       data: {
         name: req.body.name,

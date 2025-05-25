@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion Restaurant</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>Gestion Restaurant</h1>
+    
+    <div class="tabs">
+        <div class="tab active" onclick="showTab('restaurants')">Restaurants</div>
+        <div class="tab" onclick="showTab('employees')">Employés</div>
+    </div>
+
+    <div id="restaurants" class="content active">
+        <h2>Gestion des Restaurants</h2>
+        <form id="restaurantForm">
+            <div class="form-group">
+                <label for="restaurantName">Nom du restaurant:</label>
+                <input type="text" id="restaurantName" required>
+            </div>
+            <div class="form-group">
+                <label for="restaurantAddress">Adresse:</label>
+                <input type="text" id="restaurantAddress" required>
+            </div>
+            <button type="submit">Ajouter Restaurant</button>
+        </form>
+        <table id="restaurantsTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Adresse</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div id="employees" class="content">
+        <h2>Gestion des Employés</h2>
+        <form id="employeeForm">
+            <div class="form-group">
+                <label for="employeeName">Nom de l'employé:</label>
+                <input type="text" id="employeeName" required>
+            </div>
+            <div class="form-group">
+                <label for="employeeEmail">Email:</label>
+                <input type="email" id="employeeEmail" required>
+            </div>
+            <div class="form-group">
+                <label for="employeeRestaurant">Restaurant:</label>
+                <select id="employeeRestaurant" required></select>
+            </div>
+            <button type="submit">Ajouter Employé</button>
+        </form>
+        <table id="employeesTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Restaurant</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
