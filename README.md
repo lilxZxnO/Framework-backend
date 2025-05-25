@@ -9,3 +9,6 @@ Application web pour gérer des restaurants et leurs employés.
   3. `npx prisma migrate dev --name init`
   4. `npm run dev`
 - Accès : http://localhost:3000
+
+Video demo du code:
+https://youtu.be/1pqyJiRGU0Q
