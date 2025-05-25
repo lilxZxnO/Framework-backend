@@ -4,7 +4,7 @@ exports.getAllRestaurants = async (req, res) => {
   try {
     const restaurants = await prisma.restaurant.findMany({
       include: {
-        employees: true
+        employee: true
       }
     });
     res.json(restaurants);
@@ -19,7 +19,7 @@ exports.getRestaurantById = async (req, res) => {
     const restaurant = await prisma.restaurant.findUnique({
       where: { id: parseInt(req.params.id) },
       include: {
-        employees: true
+        employee: true
       }
     });
     if (!restaurant) {
